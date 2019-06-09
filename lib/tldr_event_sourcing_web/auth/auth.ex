@@ -10,8 +10,10 @@ defmodule TldrEventSourcingWeb.Auth do
   def current_speaker(conn) do
 
     metadata = if conn do
-      {a,b,c,d} = conn.remote_ip
-      %{remote_ip: "#{a}.#{b}.#{c}.#{d}"}
+      case conn.remote_ip do
+        {a,b,c,d} -> %{remote_ip: "#{a}.#{b}.#{c}.#{d}"}
+        _ -> %{} #might have more than 4 elements, quick patch!
+      end
     else
       %{}
     end
