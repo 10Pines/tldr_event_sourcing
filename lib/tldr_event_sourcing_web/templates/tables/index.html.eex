@@ -1,0 +1,81 @@
+<h3>users</h3>
+
+<table>
+  <thead>
+    <th>id</th>
+    <th>username</th>
+  </thead>
+  <%= for t <- @users do %>
+    <tr>
+      <td><%= t.id %></td>
+      <td><%= t.username %></td>
+    </tr>
+  <%= end %>
+</table>
+
+<hr>
+
+<h3>credentials</h3>
+
+<table>
+  <thead>
+    <th>id</th>
+    <th>user_id</th>
+    <th>encrypted_password</th>
+  </thead>
+  <%= for t <- @credentials do %>
+    <tr>
+      <td><%= t.id %></td>
+      <td><%= t.user_id %></td>
+      <td><%= t.encrypted_password %></td>
+    </tr>
+  <%= end %>
+</table>
+
+<hr>
+
+<h3>tickets</h3>
+
+<table>
+  <thead>
+    <th>id</th>
+    <th>title</th>
+    <th>body</th>
+    <th>timestamp</th>
+    <th>author_id</th>
+  </thead>
+  <%= for t <- @tickets do %>
+    <tr>
+      <td><%= t.id %></td>
+      <td><%= t.title %></td>
+      <td><%= t.body %></td>
+      <td><%= t.timestamp %></td>
+      <td><%= t.author_id %></td>
+    </tr>
+  <%= end %>
+</table>
+
+<hr>
+
+<h3>comments</h3>
+
+<table>
+  <thead>
+    <th>id</th>
+    <th>text</th>
+    <th>ticket_id</th>
+    <th>author_id</th>
+    <th>timestamp</th>
+  </thead>
+  <%= for t <- @comments do %>
+    <tr>
+      <td><%= t.id %></td>
+      <td><%= t.text %></td>
+      <td><%= t.author_id %></td>
+      <td><%= t.ticket_id %></td>
+      <td><%= t.timestamp %></td>
+    </tr>
+  <%= end %>
+</table>
+
+

@@ -1,0 +1,52 @@
+<%= if @speaker_id do %>
+  <p> Currently filtering by speaker:<%= @speaker_id%></p> <a href="/events">Clear</a>
+<% end %>
+  
+<%= if @aggregate_id do %>
+  <p> Currently filtering by aggregate: <%= remove_namespace(@aggregate_type) %> <%= @aggregate_id %></p> <a href="/events">Clear</a>
+<% end %>
+   
+
+<table class="event">
+
+  <%= for {event, index} <- Enum.zip(@events, 0..1000) do %>
+
+  <tr class="<%= class_for_event(event, index) %>">
+    <td class="label">speaker</td>
+    <td>
+      <a href="/events?speaker_id=<%= event.speaker_id || event.speaker_type %>">
+        <%= remove_namespace(event.speaker_type) %>:<%= truncate_uuid(event.speaker_id) %></td>
+      </a>
+    
+    <td class="label">aggregate</td>
+    <td><%= remove_namespace(event.aggregate_type) %></td>
+    <td>
+      <a href="/events?aggregate_id=<%= event.aggregate_id %>&aggregate_type=<%= event.aggregate_type %>">
+        <%= truncate_uuid(event.aggregate_id) %>
+      </a>
+    </td>
+    <td class="label">event</td>
+    <td><%= event.event_type %></td>
+    <td><%= event.timestamp %></td>    
+  </tr>
+
+  <tr class="<%= class_for_event(event, index) %>">
+    <td class="label">hash</td>
+    <td><%= truncate_hash(event.hash)%>
+    <td class="label">parent hash</td>
+    <td><%= truncate_hash(event.parent_hash)%>
+    <td class="label">meta</td>
+    <td colspan="3"><%= if event.speaker_metadata == %{}, do: "", else: Jason.Formatter.pretty_print(Jason.encode!(event.speaker_metadata)) %></td>
+  </tr>
+
+  <tr class="<%= class_for_event(event, index) %>">
+    <td class="label">data</td>
+    <td colspan="7"><%= Jason.Formatter.pretty_print(Jason.encode!(event.data)) %></td>
+  </tr>
+
+
+  <% end %>
+
+</table>
+  
+<a href="/events.json">All events as JSON</a>

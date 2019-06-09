@@ -1,0 +1,19 @@
+<h1>Login</h1>
+
+<%= form_for @conn, Routes.sessions_path(@conn, :create), fn f -> %>
+  <%= if @error do %>
+    <div style="color:red">
+      <p><%= @error %> </p>
+    </div>
+  <% end %>
+
+  <%= label f, :username %>
+  <%= text_input f, :username %>
+
+  <%= label f, :password %>
+  <%= password_input f, :password %>
+
+  <div>
+    <%= submit "Login" %>
+  </div>
+<% end %>

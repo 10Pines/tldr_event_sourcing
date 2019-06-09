@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>TldrEventSourcing · Phoenix Framework</title>
+    <style>
+      table {
+        border-spacing: 0;
+        width: 100%;
+        table-layout: fixed;
+      }
+      
+      table td, th {
+        border: 0.5px solid black; 
+        padding: 5px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      } 
+
+      .label {
+        font-weight: bold;
+      }
+
+      .even {
+        background-color: #e6e6ff;
+      }
+
+      .odd {
+        background-color: #ffe6f7;
+      }
+
+      .blockchain { 
+        background-color: #d8ca2f;
+      }
+      form {
+        display: inline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="display:inline">tl;dr Event Sourcing</h1> - 
+    <a href="/tickets">tickets</a> - <a href="/tables">tables</a> - <a href="/events">events</a> - <a href="/blockchain">blockchain</a> 
+    <%= if is_guest(@conn) do %>
+      Guest mode <a href="/sessions/new">login</a> 
+    <%= else %>
+      Current User: <%= current_user(@conn).username %> <a href="/sessions/logout">logout</a> 
+    <% end %>
+    <span style="float:right;">By Nicolás Perez Santoro @ <a href="https://www.10pines.com">10pines</a> - github</span>
+    <hr />
+    <%= render @view_module, @view_template, assigns %>
+  </body>
+</html>

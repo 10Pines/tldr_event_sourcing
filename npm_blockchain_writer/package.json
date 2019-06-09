@@ -1,0 +1,11 @@
+{
+  "name": "npm_blockchain_writer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "bsv": "^0.27.1",
+    "commander": "^2.20.0",
+    "datapay": "^0.0.14"
+  }
+}

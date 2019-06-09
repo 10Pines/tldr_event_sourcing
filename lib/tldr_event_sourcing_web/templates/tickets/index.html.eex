@@ -1,0 +1,10 @@
+  <%= for ticket <- @tickets do %>
+    <p><b><%= ticket.title %></b> (<%= ticket.author.username %>)  <%= link("Show", to: Routes.tickets_path(@conn, :show, ticket.id)) %></p>
+  <% end %>
+
+<%= only_if_logged_in @conn, "create tickets", fn -> %>
+  <%= form_for @conn, Routes.tickets_path(@conn, :create), fn f -> %>
+    <%= text_input f, :title %>
+    <%= submit "Create" %>
+  <% end %>
+<% end %>

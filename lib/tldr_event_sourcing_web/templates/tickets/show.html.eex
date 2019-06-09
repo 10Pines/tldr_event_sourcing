@@ -1,0 +1,31 @@
+<h1><%= @ticket.title %></h1>
+<h3>Created by <%= @ticket.author.username %> at <%= @ticket.timestamp %></h3>
+<p><%= @ticket.body %></p>
+<h2>Comments:</h2>
+
+<%= for comment <- sorted_comments(@ticket) do %>
+  <%= if comment.author_id == current_user(@conn).id do %>
+    <p>
+      <%= form_for @conn, Routes.tickets_path(@conn, :edit_comment, @ticket.id, comment.id), [{:method, :put}], fn f -> %>
+        <b>me</b><%= text_input f, :text, value: comment.text %>(<%= comment.timestamp %>) <%= submit "Edit" %>
+      <%= end %>
+      <%= form_for @conn, Routes.tickets_path(@conn, :delete_comment, @ticket.id, comment.id), [{:method, :delete}], fn f -> %>
+        <%= submit "Delete" %>
+      <%= end %>
+    </p>
+    
+  <%= else %>
+    <p><b><%= comment.author.username %></b> <%= comment.text %> (<%= comment.timestamp %>)</p>
+  <% end %>
+<% end %>
+
+<%= only_if_logged_in @conn, "add a comment", fn -> %>
+  <%= form_for @conn, Routes.tickets_path(@conn, :add_comment, @ticket.id), fn f -> %>
+    <%= text_input f, :text %>
+    <%= submit "Add comment" %>
+  <% end %>
+<% end %>
+
+<br/>
+
+<%= link("Back", to: Routes.tickets_path(@conn, :index)) %>
