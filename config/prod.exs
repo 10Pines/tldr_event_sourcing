@@ -11,10 +11,10 @@ use Mix.Config
 # before starting your production server.
 config :tldr_event_sourcing, TldrEventSourcingWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 4000],
-  url: [scheme: "https", host: "nameless-ocean-21044.herokuapp.com/", port: 443],
+  url: [scheme: "https", host: "tldr-event-sourcing.herokuapp.com/", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE"),
-  check_origin: ["https://nameless-ocean-21044.herokuapp.com/"]
+  check_origin: ["https://tldr-event-sourcing.herokuapp.com/"]
 
 
 config :tldr_event_sourcing, TldrEventSourcingWeb.Auth.Guardian,
