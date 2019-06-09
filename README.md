@@ -29,17 +29,7 @@ Para borrar las vistas de las entidades y hacer replay de eventos, por ejemplo s
 
 Install node & yarn, cd npm_blockchain_writer and do yarn install.
 
-To be able to run this, you'll need to create a dev.wallet.exs in /config with something like
-
-```
-use Mix.Config
-
-config :tldr_event_sourcing, :hash_braid,
-  wallet_private_key: "<your_private_key_here>",
-  address: "<your_address>"
-```
-
-The address is actually optional and only used to create the hyperlink in the `/blockchain` html view.
+To be able to run this, you'll need to set the WALLET_PRIVATE_KEY and WALLET_PUBLIC_ADDRESS env variables. The address is actually optional and only used to create the hyperlink in the `/blockchain` html view.
 
 ## A few comments
 

@@ -60,6 +60,10 @@ config :tldr_event_sourcing, TldrEventSourcing.Repo,
   password: "postgres",
   hostname: "localhost"
 
+config :tldr_event_sourcing, :hash_braid,
+  wallet_private_key: Map.get(System.get_env(), "WALLET_PRIVATE_KEY") || "NO_PRIVATE_KEY_SET",
+  address: Map.get(System.get_env(), "WALLET_PUBLIC_ADDRESS") || "NO_ADDRESS_SET"
+
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
 # file won't be loaded nor affect the parent project. For this reason,

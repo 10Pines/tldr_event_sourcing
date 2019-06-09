@@ -20,6 +20,10 @@
   <%= end %>
 </table>
 
+<a href="https://whatsonchain.com/address/<%= @address%>" target="_blank" rel="noopener noreferrer">See address on WhatsOnChain</a>
+
+<br/>
+
 <%= only_if_logged_in @conn, "publish transactions", fn -> %>
   <%= form_for @conn, Routes.blockchain_path(@conn, :post_transaction), fn f -> %>
     <%= submit "Post transaction" %>
@@ -28,6 +32,5 @@
   <%= form_for @conn, Routes.blockchain_path(@conn, :update_transaction_status), fn f -> %>
     <%= submit "Update transaction status" %>
   <% end %>
-
-  <a href="https://whatsonchain.com/address/<%= @address%>" target="_blank" rel="noopener noreferrer">See address on WhatsOnChain</a>
 <% end %>
+

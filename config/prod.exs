@@ -26,5 +26,10 @@ config :tldr_event_sourcing, TldrEventSourcing.Repo,
   pool_size:  String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true
 
+config :tldr_event_sourcing, :hash_braid,
+  wallet_private_key: Map.get(System.get_env(), "WALLET_PRIVATE_KEY") || "NO_PRIVATE_KEY_SET",
+  address: Map.get(System.get_env(), "WALLET_PUBLIC_ADDRESS") || "NO_ADDRESS_SET"
+
+
 # Do not print debug messages in production
 config :logger, level: :info
