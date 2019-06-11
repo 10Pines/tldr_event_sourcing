@@ -47,7 +47,7 @@
     <%= else %>
       Current User: <%= current_user(@conn).username %> <a href="/sessions/logout">logout</a> 
     <% end %>
-    <span style="float:right;">By Nicolás Perez Santoro @ <a href="https://www.10pines.com">10pines</a> - github</span>
+    <span style="float:right;">By Nicolás Perez Santoro @ <a href="https://www.10pines.com" target="_blank" rel="noopener noreferrer">10pines</a> - <a href="https://github.com/10Pines/tldr_event_sourcing" target="_blank" rel="noopener noreferrer">github</a></span>
     <hr />
     <%= render @view_module, @view_template, assigns %>
   </body>
