@@ -23,7 +23,6 @@ defmodule TldrEventSourcingWeb.SessionsController do
 
   def logout(conn, _logout) do
     conn |>
-#      Plug.Conn.fetch_session |>
       TldrEventSourcingWeb.Auth.Guardian.Plug.sign_out |>
       redirect(to: "/")
   end
