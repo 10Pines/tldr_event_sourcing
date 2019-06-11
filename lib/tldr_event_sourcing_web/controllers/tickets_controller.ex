@@ -1,5 +1,8 @@
 defmodule TldrEventSourcingWeb.TicketsController do
   use TldrEventSourcingWeb, :controller
+
+  plug Guardian.Plug.EnsureAuthenticated when action in [:create, :add_comment, :edit_comment, :delete_comment]
+
   alias TldrEventSourcing.{Repo, Ticket}
   require Logger
 

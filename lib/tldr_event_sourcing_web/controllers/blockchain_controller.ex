@@ -1,5 +1,8 @@
 defmodule TldrEventSourcingWeb.BlockchainController do
   use TldrEventSourcingWeb, :controller
+
+  plug Guardian.Plug.EnsureAuthenticated when action in [:post_transaction, :update_transaction_status]
+
   alias TldrEventSourcing.{Repo}
   import Ecto.Query
   require Logger
