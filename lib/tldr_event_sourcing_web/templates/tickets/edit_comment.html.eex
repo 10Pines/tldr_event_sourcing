@@ -1,0 +1,5 @@
+<%= form_for @conn, Routes.tickets_path(@conn, :edit_comment, @ticket_id, @comment.id), [{:method, :put}], fn f -> %>
+  <%= text_input f, :text, value: @comment.text %>
+  
+  <%= submit "Edit" %>
+<%= end %>

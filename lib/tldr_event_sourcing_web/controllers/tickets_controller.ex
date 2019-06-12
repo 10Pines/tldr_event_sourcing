@@ -28,7 +28,12 @@ defmodule TldrEventSourcingWeb.TicketsController do
     show(conn, %{"id" => ticket_id})
   end
 
-  def edit_comment(conn, %{"text" => text, "ticket_id" => ticket_id, "comment_id" => comment_id}) do
+  def edit_comment(conn, %{"ticket_id" => ticket_id, "comment_id" => comment_id}) do
+    comment = Repo.get!(Ticket.Comment, comment_id)    
+    render(conn, "edit_comment.html", ticket_id: ticket_id, comment: comment)
+  end
+
+  def save_comment(conn, %{"text" => text, "ticket_id" => ticket_id, "comment_id" => comment_id}) do
     speaker = TldrEventSourcingWeb.Auth.current_speaker(conn)
     Ticket.edit_comment(speaker, ticket_id, comment_id, text)
     show(conn, %{"id" => ticket_id})

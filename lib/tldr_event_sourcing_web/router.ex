@@ -21,8 +21,11 @@ defmodule TldrEventSourcingWeb.Router do
       get "/", TicketsController, :index
       resources "/tickets", TicketsController
       post "/tickets/:ticket_id/comment", TicketsController, :add_comment
-      put "/tickets/:ticket_id/comment/:comment_id", TicketsController, :edit_comment
-      delete "/tickets/:ticket_id/comment/:comment_id", TicketsController, :delete_comment
+      
+      get "/tickets/:ticket_id/comment/:comment_id", TicketsController, :edit_comment
+      put "/tickets/:ticket_id/comment/:comment_id", TicketsController, :save_comment
+      #TODO: this should NOT be a get, but a delete!
+      get "/tickets/:ticket_id/comment/:comment_id/delete", TicketsController, :delete_comment
 
       resources "/events", EventsController
       get "/events.json", EventsController, :index_json

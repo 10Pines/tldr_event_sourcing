@@ -1,22 +1,53 @@
-<h1><%= @ticket.title %></h1>
-<h3>Created by <%= @ticket.author.username %> at <%= @ticket.timestamp %></h3>
-<p><%= @ticket.body %></p>
-<h2>Comments:</h2>
+<div class="box">
+  <article class="media">
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong><%= @ticket.author.username %></strong> <small><%= @ticket.timestamp %></small>
+          <br>
+          <h1><%= @ticket.title %></h1>
+
+          <%= @ticket.body %>
+        </p>
+      </div>
+    </div>
+  </article>
+</div>
 
 <%= for comment <- sorted_comments(@ticket) do %>
-  <%= if comment.author_id == current_user(@conn).id do %>
-    <p>
-      <%= form_for @conn, Routes.tickets_path(@conn, :edit_comment, @ticket.id, comment.id), [{:method, :put}], fn f -> %>
-        <b>me</b><%= text_input f, :text, value: comment.text %>(<%= comment.timestamp %>) <%= submit "Edit" %>
-      <%= end %>
-      <%= form_for @conn, Routes.tickets_path(@conn, :delete_comment, @ticket.id, comment.id), [{:method, :delete}], fn f -> %>
-        <%= submit "Delete" %>
-      <%= end %>
-    </p>
-    
-  <%= else %>
-    <p><b><%= comment.author.username %></b> <%= comment.text %> (<%= comment.timestamp %>)</p>
-  <% end %>
+  <div class="box">
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <strong><%= comment.author.username %></strong> <small><%= comment.timestamp %></small>
+            <br />
+            <%= comment.text %>
+          </p>
+        </div>
+      </div>
+      <%= if comment.author_id == current_user(@conn).id do %>
+        <nav class="level is-mobile">
+          <div class="level-left">
+            <%= link(to: Routes.tickets_path(@conn, :edit_comment, @ticket.id, comment.id), class: "item-level") do %>
+              <span class="icon is-small">
+                <i class="fa fa-edit" aria-hidden="true"></i>
+              </span>
+            <% end %>
+          </div>
+        </nav>
+        <nav class="level is-mobile">
+          <div class="level-left">
+            <%= link(to: Routes.tickets_path(@conn, :delete_comment, @ticket.id, comment.id), class: "item-level") do %>
+              <span class="icon is-small">
+                <i class="fa fa-remove" aria-hidden="true"></i>
+              </span>
+            <% end %>
+          </div>
+        </nav>
+      <% end %>
+    </article>
+  </div>
 <% end %>
 
 <%= only_if_logged_in @conn, "add a comment", fn -> %>
